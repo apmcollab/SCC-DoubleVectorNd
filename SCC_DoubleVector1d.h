@@ -612,7 +612,7 @@ class DoubleVector1d
     return sqrt(abs(val));
     }
 
-// Selected BLAS interface
+// Selected Level 1 BLAS interface
 
 /*! BLAS Euclidean norm of the vector */
 
@@ -705,6 +705,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
 	    }
 	    return outStream;
 }
+
 
     long getSize()  const {return index1Size;}
 
