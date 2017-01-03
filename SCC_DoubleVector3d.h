@@ -55,7 +55,7 @@ using namespace std;
 #ifdef  _DEBUG
 #include <cstdio>
 #else
-#define _NDEBUG
+#define NDEBUG
 #endif
 #include <cassert>
 

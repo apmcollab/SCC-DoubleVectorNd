@@ -53,7 +53,7 @@ using namespace std;
 #ifdef  _DEBUG
 #include <cstdio>
 #else
-#define _NDEBUG
+#define NDEBUG
 #endif
 #include <cassert>
 
@@ -666,7 +666,7 @@ class DoubleVector1d
     return index1Size;
 	}
 
-#ifndef _NDEBUG
+#ifndef NDEBUG
     double&  operator()(long i1)
     {
     assert(boundsCheck(i1, 0, index1Size-1,1));
