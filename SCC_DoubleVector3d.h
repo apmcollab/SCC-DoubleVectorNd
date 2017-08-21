@@ -588,13 +588,13 @@ class DoubleVector3d
     return std::move(B);
     }
 
-    friend DoubleVector3d operator*(DoubleVector3d& A, const double alpha)
+    DoubleVector3d operator*(const double alpha) const
     {
     #ifdef _VERBOSE_OPS_
     cout  << "&A*alpha" << endl;
     #endif
 
-    DoubleVector3d R(A);
+    DoubleVector3d R(*this);
     R *= alpha;
     return std::move(R);
     }

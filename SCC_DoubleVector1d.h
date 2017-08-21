@@ -502,13 +502,13 @@ class DoubleVector1d
     return std::move(B);
     }
 
-    friend DoubleVector1d operator*(DoubleVector1d& A, const double alpha)
+    DoubleVector1d operator*(const double alpha) const
     {
     #ifdef _VERBOSE_OPS_
     cout  << "&A*alpha" << endl;
     #endif
 
-    DoubleVector1d R(A);
+    DoubleVector1d R(*this);
     R *= alpha;
     return std::move(R);
     }
