@@ -22,7 +22,7 @@
 /*
 #############################################################################
 #
-# Copyright 2015-16 Chris Anderson
+# Copyright 2015-17 Chris Anderson
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the Lesser GNU General Public License as published by
@@ -52,7 +52,7 @@ using namespace std;
 #ifdef  _DEBUG
 #include <cstdio>
 #else
-#define _NDEBUG
+#define NDEBUG
 #endif
 #include <cassert>
 
@@ -551,13 +551,13 @@ class DoubleVector2d
     return std::move(B);
     }
 
-    friend DoubleVector2d operator*(DoubleVector2d& A, const double alpha)
+    DoubleVector2d operator*(const double alpha) const
     {
     #ifdef _VERBOSE_OPS_
     cout  << "&A*alpha" << endl;
     #endif
 
-    DoubleVector2d R(A);
+    DoubleVector2d R(*this);
     R *= alpha;
     return std::move(R);
     }

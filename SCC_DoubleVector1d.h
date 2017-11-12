@@ -24,7 +24,7 @@
 /*
 #############################################################################
 #
-# Copyright 2015-16 Chris Anderson
+# Copyright 2015-17 Chris Anderson
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the Lesser GNU General Public License as published by
@@ -53,7 +53,7 @@ using namespace std;
 #ifdef  _DEBUG
 #include <cstdio>
 #else
-#define _NDEBUG
+#define NDEBUG
 #endif
 #include <cassert>
 
@@ -502,13 +502,13 @@ class DoubleVector1d
     return std::move(B);
     }
 
-    friend DoubleVector1d operator*(DoubleVector1d& A, const double alpha)
+    DoubleVector1d operator*(const double alpha) const
     {
     #ifdef _VERBOSE_OPS_
     cout  << "&A*alpha" << endl;
     #endif
 
-    DoubleVector1d R(A);
+    DoubleVector1d R(*this);
     R *= alpha;
     return std::move(R);
     }
@@ -612,7 +612,7 @@ class DoubleVector1d
     return sqrt(abs(val));
     }
 
-// Selected BLAS interface
+// Selected Level 1 BLAS interface
 
 /*! BLAS Euclidean norm of the vector */
 
@@ -666,7 +666,7 @@ class DoubleVector1d
     return index1Size;
 	}
 
-#ifndef _NDEBUG
+#ifndef NDEBUG
     double&  operator()(long i1)
     {
     assert(boundsCheck(i1, 0, index1Size-1,1));
@@ -705,6 +705,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
 	    }
 	    return outStream;
 }
+
 
     long getSize()  const {return index1Size;}
 
