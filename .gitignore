@@ -2,3 +2,6 @@ Doc
 .hg
 .hgignore
 .hgsub
+.settings
+.project
+.cproject
