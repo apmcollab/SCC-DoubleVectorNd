@@ -3,3 +3,5 @@ Doc
 .hgignore
 .hgsub
 .settings
+.project
+.cproject
