@@ -1,5 +1,5 @@
-## Project Title
-DoubleVectorNd
+## DoubleVectorNd
+
 
 The SCC::DoubleVectorNd classes N = 1,2,3 are "light" array classes with mathematical vector structure.  
 
