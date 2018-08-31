@@ -628,7 +628,7 @@ class DoubleVector2d
 
 /*!  Standard vector dot product.  */
 
-	double dot(DoubleVector2d& v)
+	double dot(const DoubleVector2d& v) const
 	{
     double dotVal = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
@@ -666,7 +666,7 @@ class DoubleVector2d
 
 /*! BLAS Euclidean norm of the vector */
 
-double nrm2()
+double nrm2() const
 {
    return norm2();
 }

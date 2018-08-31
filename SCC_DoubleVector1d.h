@@ -616,7 +616,7 @@ class DoubleVector1d
 
 /*! BLAS Euclidean norm of the vector */
 
-   virtual double nrm2()
+   virtual double nrm2() const
    {
    return norm2();
    }

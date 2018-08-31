@@ -665,7 +665,7 @@ class DoubleVector3d
 
 /*!  Standard vector dot product.  */
 
-	double dot(DoubleVector3d& v)
+	double dot(const DoubleVector3d& v) const
 	{
     double dotVal = 0.0;
     for(long i = 0; i < index1Size*index2Size*index3Size; i++)
@@ -703,7 +703,7 @@ class DoubleVector3d
 
 /*! BLAS Euclidean norm of the vector */
 
-double nrm2()
+double nrm2() const
 {
    return norm2();
 }
