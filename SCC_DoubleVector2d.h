@@ -47,7 +47,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-using namespace std;
+
 
 #ifdef  _DEBUG
 #include <cstdio>
@@ -645,7 +645,7 @@ class DoubleVector2d
     double valMax = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
     {
-    valMax = (valMax > abs(dataPtr[i])) ? valMax : abs(dataPtr[i]);
+    valMax = (valMax > std::abs(dataPtr[i])) ? valMax : std::abs(dataPtr[i]);
     }
     return valMax;
 	}
@@ -659,7 +659,7 @@ class DoubleVector2d
     {
     val += (dataPtr[i]*dataPtr[i]);
     }
-    return sqrt(abs(val));
+    return std::sqrt(std::abs(val));
 }
 
 // Selected BLAS interface
@@ -764,7 +764,7 @@ virtual long getDimension()
 
 /*!  Outputs the vector values to a stream using first quadrant indexing: (i,j) = (0,0) in lower left corner. */
 
-friend ostream& operator<<(ostream& outStream, const DoubleVector2d&V )
+friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector2d&V )
 {
         long i; long j;
 
@@ -772,9 +772,9 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector2d&V )
         {
         for(i = 0; i <  V.index1Size; i++)
         {
-          outStream <<   std::scientific << setprecision(3) <<  std::right << setw(10) << V(i,j) << " ";
+          outStream <<   std::scientific << std::setprecision(3) <<  std::right << std::setw(10) << V(i,j) << " ";
         }
-        outStream << endl;
+        outStream << std::endl;
         }
         return outStream;
 }
@@ -802,8 +802,8 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector2d&V )
         {
         if((i < begin)||(i  > end))
         {
-        cerr << "SCC::DoubleVector2d index " << coordinate << " out of bounds " << endl;
-        cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << endl;
+        std::cerr << "SCC::DoubleVector2d index " << coordinate << " out of bounds " << std::endl;
+        std::cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << std::endl;
         return false;
         }
         return true;
@@ -817,7 +817,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector2d&V )
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;
@@ -827,7 +827,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector2d&V )
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;

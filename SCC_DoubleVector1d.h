@@ -48,7 +48,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-using namespace std;
+
 
 #ifdef  _DEBUG
 #include <cstdio>
@@ -595,7 +595,7 @@ class DoubleVector1d
     double valMax = 0.0;
     for(long i = 0; i < index1Size; i++)
     {
-    valMax = (valMax > abs(dataPtr[i])) ? valMax : abs(dataPtr[i]);
+    valMax = (valMax > std::abs(dataPtr[i])) ? valMax : std::abs(dataPtr[i]);
     }
     return valMax;
     }
@@ -609,7 +609,7 @@ class DoubleVector1d
     {
     val += (dataPtr[i]*dataPtr[i]);
     }
-    return sqrt(abs(val));
+    return std::sqrt(std::abs(val));
     }
 
 // Selected Level 1 BLAS interface
@@ -694,14 +694,14 @@ class DoubleVector1d
 
  /*!  Outputs vector values to a stream. */
 
-friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
+friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector1d& V)
 {
 
 	    long i;
 	    for(i = 0; i <  V.index1Size; i++)
 	    {
-	      outStream <<  setprecision(3) <<  std::right << setw(10) << V(i) << " ";
-	      outStream << endl;
+	      outStream << std::setprecision(3) <<  std::right << std::setw(10) << V(i) << " ";
+	      outStream << std::endl;
 	    }
 	    return outStream;
 }
@@ -729,8 +729,8 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
         {
         if((i < begin)||(i  > end))
         {
-        cerr << "SCC::DoubleVector1d index " << coordinate << " out of bounds " << endl;
-        cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << endl;
+        std::cerr << "SCC::DoubleVector1d index " << coordinate << " out of bounds " << std::endl;
+        std::cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << std::endl;
         return false;
         }
         return true;
@@ -744,7 +744,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;
@@ -754,7 +754,7 @@ friend ostream& operator<<(ostream& outStream, const DoubleVector1d& V)
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;

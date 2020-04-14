@@ -48,7 +48,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-using namespace std;
+
 
 
 
@@ -682,7 +682,7 @@ class DoubleVector3d
     double valMax = 0.0;
     for(long i = 0; i < index1Size*index2Size*index3Size; i++)
     {
-    valMax = (valMax > abs(dataPtr[i])) ? valMax : abs(dataPtr[i]);
+    valMax = (valMax > std::abs(dataPtr[i])) ? valMax : std::abs(dataPtr[i]);
     }
     return valMax;
 	}
@@ -696,7 +696,7 @@ class DoubleVector3d
     {
     val += (dataPtr[i]*dataPtr[i]);
     }
-    return sqrt(abs(val));
+    return std::sqrt(std::abs(val));
 }
 
 // Selected BLAS interface
@@ -804,7 +804,7 @@ virtual long getDimension()
 
 /*!  Outputs the vector values to a stream z-slices and using first quadrant indexing for (i,j);  (i,j) = (0,0) in lower left corner. */
 
-    friend ostream& operator<<(ostream& outStream, const DoubleVector3d&V )
+    friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector3d&V )
     {
             long i; long j; long k;
 
@@ -814,11 +814,11 @@ virtual long getDimension()
             {
             for(i = 0; i <  V.index1Size; i++)
             {
-              outStream <<  std::scientific << setprecision(3) <<  std::right << setw(10) << V(i,j,k) << " ";
+              outStream <<  std::scientific << std::setprecision(3) <<  std::right << std::setw(10) << V(i,j,k) << " ";
             }
-            outStream << endl;
+            outStream << std::endl;
             }
-            outStream << endl << endl << endl;
+            outStream << std::endl << std::endl << std::endl;
             }
             return outStream;
     }
@@ -848,8 +848,8 @@ virtual long getDimension()
         {
         if((i < begin)||(i  > end))
         {
-        cerr << "SCC::DoubleVector3d index " << coordinate << " out of bounds " << endl;
-        cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << endl;
+        std::cerr << "SCC::DoubleVector3d index " << coordinate << " out of bounds " << std::endl;
+        std::cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << std::endl;
         return false;
         }
         return true;
@@ -863,7 +863,7 @@ virtual long getDimension()
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;
@@ -873,7 +873,7 @@ virtual long getDimension()
     {
     if(size1 != size2)
     {
-    cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
     return false;
     }
     return true;

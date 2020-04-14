@@ -10,7 +10,7 @@ These classes currently use move semantics to avoid extraneous copying.
 ### Prerequisites
 C++11
 ### Versioning
-Release : 19.12.16
+Release : 1.0.1
 ### Authors
 Chris Anderson
 ### License
