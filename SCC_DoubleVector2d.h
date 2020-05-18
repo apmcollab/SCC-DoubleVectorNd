@@ -66,30 +66,30 @@ namespace SCC
 {
 class DoubleVector2d
 {
-	public:
+    public:
 
     DoubleVector2d()
-	{
-	dataPtr    = nullptr;
-	index1Size = 0;
-	index2Size = 0;
-	}
+    {
+    dataPtr    = nullptr;
+    index1Size = 0;
+    index2Size = 0;
+    }
 
-	explicit DoubleVector2d(long m, long n)
-	{
-	if(m*n > 0)
-	{
-	dataPtr    = new double[m*n];
-	index1Size = m;
-	index2Size = n;
-	}
-	else {dataPtr    = nullptr; index1Size = 0; index2Size = 0;}
-	}
+    explicit DoubleVector2d(long m, long n)
+    {
+    if(m*n > 0)
+    {
+    dataPtr    = new double[m*n];
+    index1Size = m;
+    index2Size = n;
+    }
+    else {dataPtr    = nullptr; index1Size = 0; index2Size = 0;}
+    }
 
    DoubleVector2d(const DoubleVector2d& V)
    {
       #ifdef _VERBOSE_OPS_
-      cout << "Standard Copy " << endl;
+      std::cout << "Standard Copy " << std::endl;
       #endif
 
       if(V.dataPtr == nullptr) {dataPtr = nullptr; index1Size = 0; index2Size = 0; return;}
@@ -109,7 +109,7 @@ class DoubleVector2d
     DoubleVector2d(DoubleVector2d&& V)
     {
       #ifdef _VERBOSE_OPS_
-      cout << "Move Copy " << endl;
+      std::cout << "Move Copy " << std::endl;
       #endif
 
       dataPtr      = V.dataPtr;
@@ -120,33 +120,33 @@ class DoubleVector2d
       V.index2Size = 0;
     }
 
-   	virtual ~DoubleVector2d()
-	{
-	if(dataPtr != nullptr) delete [] dataPtr;
-	}
+       virtual ~DoubleVector2d()
+    {
+    if(dataPtr != nullptr) delete [] dataPtr;
+    }
 
-	void initialize()
-	{
-	if(dataPtr != nullptr) delete [] dataPtr;
-	dataPtr    = nullptr;
-	index1Size = 0;
-	index2Size = 0;
-	}
+    void initialize()
+    {
+    if(dataPtr != nullptr) delete [] dataPtr;
+    dataPtr    = nullptr;
+    index1Size = 0;
+    index2Size = 0;
+    }
 
-	void initialize(long m, long n)
-	{
-		if((index1Size != m)||(index2Size != n))
-    	{
-    		if(dataPtr != nullptr) delete [] dataPtr;
-    		if(m*n > 0)
-    		{
-    			dataPtr    = new double[m*n];
-    			index1Size = m;
-    			index2Size = n;
-    		}
-    		else {dataPtr    = nullptr; index1Size = 0; index2Size = 0;}
-    	}
-	}
+    void initialize(long m, long n)
+    {
+        if((index1Size != m)||(index2Size != n))
+        {
+            if(dataPtr != nullptr) delete [] dataPtr;
+            if(m*n > 0)
+            {
+                dataPtr    = new double[m*n];
+                index1Size = m;
+                index2Size = n;
+            }
+            else {dataPtr    = nullptr; index1Size = 0; index2Size = 0;}
+        }
+    }
 
     void initialize(const DoubleVector2d& V)
     {
@@ -161,7 +161,7 @@ class DoubleVector2d
 
       if((index1Size != V.index1Size)||(index2Size != V.index2Size))
       {
-	  if(dataPtr != nullptr) delete [] dataPtr;
+      if(dataPtr != nullptr) delete [] dataPtr;
       dataPtr     = new double[V.index1Size*V.index2Size];
       index1Size = V.index1Size;
       index2Size = V.index2Size;
@@ -201,7 +201,7 @@ class DoubleVector2d
     DoubleVector2d& operator=(const DoubleVector2d& V)
     {
       #ifdef _VERBOSE_OPS_
-      cout << "Standard Assignment" << endl;
+      std::cout << "Standard Assignment" << std::endl;
       #endif
 
       if (this != &V)
@@ -234,13 +234,13 @@ class DoubleVector2d
       return *this;
     }
 
-	DoubleVector2d& operator=(DoubleVector2d&& V)
-	{
+    DoubleVector2d& operator=(DoubleVector2d&& V)
+    {
     #ifdef _VERBOSE_OPS_
-    cout << "Move Assignment" << endl;
+    std::cout << "Move Assignment" << std::endl;
     #endif
 
-	if((dataPtr == nullptr)&&(V.dataPtr != nullptr))
+    if((dataPtr == nullptr)&&(V.dataPtr != nullptr))
     {
       dataPtr      = V.dataPtr;
       index1Size   = V.index1Size;
@@ -270,15 +270,15 @@ class DoubleVector2d
     }
 
     inline void transformValues(std::function<double(double)> F)
-	{
+    {
     for(long k =0; k < index1Size*index2Size; k++)
     {dataPtr[k] = F(dataPtr[k]);}
-	}
+    }
 
-	DoubleVector2d applyFunction(std::function<double(double)> F)
+    DoubleVector2d applyFunction(std::function<double(double)> F)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "F(*this)" << endl;
+    std::cout  << "F(*this)" << std::endl;
     #endif
 
     DoubleVector2d R(*this);
@@ -293,14 +293,14 @@ class DoubleVector2d
       assert(sizeCheck(this->index2Size,D.index2Size,2));
       for(long i = 0; i < index1Size*index2Size; i++)
       {
-    		dataPtr[i] += D.dataPtr[i];
+            dataPtr[i] += D.dataPtr[i];
       }
     }
 
     friend DoubleVector2d operator+(const DoubleVector2d& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A + &B" << endl;
+    std::cout  << "&A + &B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -314,7 +314,7 @@ class DoubleVector2d
     friend DoubleVector2d operator+(const DoubleVector2d& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A + &&B " << endl;
+    std::cout  << "&A + &&B " << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -327,7 +327,7 @@ class DoubleVector2d
     friend DoubleVector2d operator+(DoubleVector2d&& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A +  &B" << endl;
+    std::cout  << "&&A +  &B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -340,7 +340,7 @@ class DoubleVector2d
     friend DoubleVector2d operator+(DoubleVector2d&& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A +  &&B" << endl;
+    std::cout  << "&&A +  &&B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -358,14 +358,14 @@ class DoubleVector2d
 
     for(long i = 0; i < index1Size*index2Size; i++)
     {
-    	dataPtr[i] -= D.dataPtr[i];
+        dataPtr[i] -= D.dataPtr[i];
     }
     }
 
     friend DoubleVector2d operator-(const DoubleVector2d& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A - &B" << endl;
+    std::cout  << "&A - &B" << std::endl;
     #endif
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
     assert(A.sizeCheck(A.index2Size,B.index2Size,2));
@@ -378,7 +378,7 @@ class DoubleVector2d
     friend DoubleVector2d operator-(const DoubleVector2d& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A - &&B " << endl;
+    std::cout  << "&A - &&B " << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -394,7 +394,7 @@ class DoubleVector2d
     friend DoubleVector2d operator-(DoubleVector2d&& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A -  &B" << endl;
+    std::cout  << "&&A -  &B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -407,7 +407,7 @@ class DoubleVector2d
     friend DoubleVector2d operator-(DoubleVector2d&& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A -  &&B" << endl;
+    std::cout  << "&&A -  &&B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -420,7 +420,7 @@ class DoubleVector2d
     friend DoubleVector2d operator-(const DoubleVector2d& A)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "-&A" << endl;
+    std::cout  << "-&A" << std::endl;
     #endif
 
     DoubleVector2d R(A);
@@ -431,7 +431,7 @@ class DoubleVector2d
     friend DoubleVector2d operator-(DoubleVector2d&& A)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "- &&A" << endl;
+    std::cout  << "- &&A" << std::endl;
     #endif
 
     A *= -1.0;
@@ -441,7 +441,7 @@ class DoubleVector2d
     friend DoubleVector2d operator+(const DoubleVector2d& A)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "+&A" << endl;
+    std::cout  << "+&A" << std::endl;
     #endif
 
     DoubleVector2d R(A);
@@ -451,7 +451,7 @@ class DoubleVector2d
     friend DoubleVector2d operator+(DoubleVector2d&& A)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "+&&A" << endl;
+    std::cout  << "+&&A" << std::endl;
     #endif
 
     return std::move(A);
@@ -462,16 +462,16 @@ class DoubleVector2d
     {
         assert(sizeCheck(index1Size,B.index1Size,1));
         assert(sizeCheck(index2Size,B.index2Size,2));
-    	for(long i = 0; i < index1Size*index2Size; i++)
-    	{
-    		dataPtr[i] *= B.dataPtr[i];
-    	}
+        for(long i = 0; i < index1Size*index2Size; i++)
+        {
+            dataPtr[i] *= B.dataPtr[i];
+        }
     }
 
     friend DoubleVector2d operator*(const DoubleVector2d& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A * &B" << endl;
+    std::cout  << "&A * &B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -485,7 +485,7 @@ class DoubleVector2d
     friend DoubleVector2d operator*(const DoubleVector2d& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A * &&B " << endl;
+    std::cout  << "&A * &&B " << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -498,7 +498,7 @@ class DoubleVector2d
     friend DoubleVector2d operator*(DoubleVector2d&& A, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A *  &B" << endl;
+    std::cout  << "&&A *  &B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -511,7 +511,7 @@ class DoubleVector2d
     friend DoubleVector2d operator*(DoubleVector2d&& A, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A *  &&B" << endl;
+    std::cout  << "&&A *  &&B" << std::endl;
     #endif
 
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -527,14 +527,14 @@ class DoubleVector2d
     {
     for(long i = 0; i < index1Size*index2Size; i++)
     {
-    		dataPtr[i] *= alpha;
+            dataPtr[i] *= alpha;
     }
     }
 
     friend DoubleVector2d operator*(const double alpha, const DoubleVector2d& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "alpha* &B" << endl;
+    std::cout  << "alpha* &B" << std::endl;
     #endif
 
     DoubleVector2d R(B);
@@ -545,7 +545,7 @@ class DoubleVector2d
     friend DoubleVector2d operator*(const double alpha, DoubleVector2d&& B)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "alpha*+ &&B " << endl;
+    std::cout  << "alpha*+ &&B " << std::endl;
     #endif
 
     B *= alpha;
@@ -555,7 +555,7 @@ class DoubleVector2d
     DoubleVector2d operator*(const double alpha) const
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A*alpha" << endl;
+    std::cout  << "&A*alpha" << std::endl;
     #endif
 
     DoubleVector2d R(*this);
@@ -566,7 +566,7 @@ class DoubleVector2d
     friend DoubleVector2d operator*(DoubleVector2d&& A,const double alpha)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A * alpha" << endl;
+    std::cout  << "&&A * alpha" << std::endl;
     #endif
 
     A *= alpha;
@@ -578,10 +578,10 @@ class DoubleVector2d
     {
         assert(sizeCheck(index1Size,B.index1Size,1));
         assert(sizeCheck(index2Size,B.index2Size,2));
-    	for(long i = 0; i < index1Size*index2Size; i++)
-    	{
-    		dataPtr[i] /= B.dataPtr[i];
-    	}
+        for(long i = 0; i < index1Size*index2Size; i++)
+        {
+            dataPtr[i] /= B.dataPtr[i];
+        }
     }
 
 
@@ -589,14 +589,14 @@ class DoubleVector2d
     {
     for(long i = 0; i < index1Size*index2Size; i++)
     {
-    		dataPtr[i] /= alpha;
+            dataPtr[i] /= alpha;
     }
     }
 
     friend DoubleVector2d operator/(DoubleVector2d& A, const double alpha)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&A/alpha" << endl;
+    std::cout  << "&A/alpha" << std::endl;
     #endif
 
     DoubleVector2d R(A);
@@ -607,54 +607,54 @@ class DoubleVector2d
     friend DoubleVector2d operator/(DoubleVector2d&& A,const double alpha)
     {
     #ifdef _VERBOSE_OPS_
-    cout  << "&&A/alpha" << endl;
+    std::cout  << "&&A/alpha" << std::endl;
     #endif
 
     A /= alpha;
     return std::move(A);
     }
 /*!  Sets all values of the vector to d. */
-	void setToValue(double d)
-	{
-	for(long i = 0; i < index1Size*index2Size; i++)
-	{dataPtr[i] =  d;}
-	}
+    void setToValue(double d)
+    {
+    for(long i = 0; i < index1Size*index2Size; i++)
+    {dataPtr[i] =  d;}
+    }
 
     void addValue(double d)
-	{
-	for(long i = 0; i < index1Size*index2Size; i++)
-	{dataPtr[i] += d;}
-	}
+    {
+    for(long i = 0; i < index1Size*index2Size; i++)
+    {dataPtr[i] += d;}
+    }
 
 
 /*!  Standard vector dot product.  */
 
-	double dot(const DoubleVector2d& v) const
-	{
+    double dot(const DoubleVector2d& v) const
+    {
     double dotVal = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
     {
     dotVal += (dataPtr[i]*v.dataPtr[i]);
     }
     return dotVal;
-	}
+    }
 
 /*!  Maximal absolute value of the elements of the vector. */
 
-	double normInf() const
-	{
+    double normInf() const
+    {
     double valMax = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
     {
     valMax = (valMax > std::abs(dataPtr[i])) ? valMax : std::abs(dataPtr[i]);
     }
     return valMax;
-	}
+    }
 
 /*!  The Euclidean norm of the vector. */
 
-	double norm2() const
-	{
+    double norm2() const
+    {
     double val = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
     {
@@ -683,12 +683,12 @@ void  scal(double alpha)
 
 void copy(const DoubleVector2d& v)
 {
-	this->operator=(v);
+    this->operator=(v);
 }
 
 void copy(DoubleVector2d&& v)
 {
-	this->operator=((DoubleVector2d&&)v);
+    this->operator=((DoubleVector2d&&)v);
 }
 
 /*! BLAS axpby : this  <- alpha*v + beta*this  */
@@ -789,8 +789,8 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector2d&V 
     double* getDataPointer(){return dataPtr;}
     const  double* getDataPointer() const {return dataPtr;};
 
-	double*       dataPtr;
-	long index1Size;
+    double*       dataPtr;
+    long index1Size;
     long index2Size;
 
 
