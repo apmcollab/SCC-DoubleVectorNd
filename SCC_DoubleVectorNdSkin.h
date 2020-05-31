@@ -64,8 +64,8 @@
 #include "SCC_DoubleVector3d.h"
 
 
-#ifndef _SCC_DoubleVectorNdSkin_
-#define _SCC_DoubleVectorNdSkin_
+#ifndef SCC_DOUBLE_VECTOR_ND_SKIN_
+#define SCC_DOUBLE_VECTOR_ND_SKIN_
 
 namespace SCC
 {
@@ -227,4 +227,4 @@ public:
 
 
 
-#endif /*_SCC_DoubleVectorNdSkin_*/
+#endif /*SCC_DoubleVectorNdSkin_*/

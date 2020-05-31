@@ -57,10 +57,10 @@
 #endif
 #include <cassert>
 
-#undef _VERBOSE_OPS_
+#undef VERBOSE_OPS
 
-#ifndef _SCC_DoubleVector2d_
-#define _SCC_DoubleVector2d_
+#ifndef SCC_DOUBLE_VECTOR_2D_
+#define SCC_DOUBLE_VECTOR_2D_
 
 namespace SCC
 {
@@ -88,7 +88,7 @@ class DoubleVector2d
 
    DoubleVector2d(const DoubleVector2d& V)
    {
-      #ifdef _VERBOSE_OPS_
+      #ifdef VERBOSE_OPS
       std::cout << "Standard Copy " << std::endl;
       #endif
 
@@ -108,7 +108,7 @@ class DoubleVector2d
 
     DoubleVector2d(DoubleVector2d&& V)
     {
-      #ifdef _VERBOSE_OPS_
+      #ifdef VERBOSE_OPS
       std::cout << "Move Copy " << std::endl;
       #endif
 
@@ -200,7 +200,7 @@ class DoubleVector2d
 
     DoubleVector2d& operator=(const DoubleVector2d& V)
     {
-      #ifdef _VERBOSE_OPS_
+      #ifdef VERBOSE_OPS
       std::cout << "Standard Assignment" << std::endl;
       #endif
 
@@ -236,7 +236,7 @@ class DoubleVector2d
 
     DoubleVector2d& operator=(DoubleVector2d&& V)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout << "Move Assignment" << std::endl;
     #endif
 
@@ -277,7 +277,7 @@ class DoubleVector2d
 
     DoubleVector2d applyFunction(std::function<double(double)> F)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "F(*this)" << std::endl;
     #endif
 
@@ -299,7 +299,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(const DoubleVector2d& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A + &B" << std::endl;
     #endif
 
@@ -313,7 +313,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(const DoubleVector2d& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A + &&B " << std::endl;
     #endif
 
@@ -326,7 +326,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(DoubleVector2d&& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A +  &B" << std::endl;
     #endif
 
@@ -339,7 +339,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(DoubleVector2d&& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A +  &&B" << std::endl;
     #endif
 
@@ -364,7 +364,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(const DoubleVector2d& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A - &B" << std::endl;
     #endif
     assert(A.sizeCheck(A.index1Size,B.index1Size,1));
@@ -377,7 +377,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(const DoubleVector2d& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A - &&B " << std::endl;
     #endif
 
@@ -393,7 +393,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(DoubleVector2d&& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A -  &B" << std::endl;
     #endif
 
@@ -406,7 +406,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(DoubleVector2d&& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A -  &&B" << std::endl;
     #endif
 
@@ -419,7 +419,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(const DoubleVector2d& A)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "-&A" << std::endl;
     #endif
 
@@ -430,7 +430,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator-(DoubleVector2d&& A)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "- &&A" << std::endl;
     #endif
 
@@ -440,7 +440,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(const DoubleVector2d& A)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "+&A" << std::endl;
     #endif
 
@@ -450,7 +450,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator+(DoubleVector2d&& A)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "+&&A" << std::endl;
     #endif
 
@@ -470,7 +470,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(const DoubleVector2d& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A * &B" << std::endl;
     #endif
 
@@ -484,7 +484,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(const DoubleVector2d& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A * &&B " << std::endl;
     #endif
 
@@ -497,7 +497,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(DoubleVector2d&& A, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A *  &B" << std::endl;
     #endif
 
@@ -510,7 +510,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(DoubleVector2d&& A, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A *  &&B" << std::endl;
     #endif
 
@@ -533,7 +533,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(const double alpha, const DoubleVector2d& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "alpha* &B" << std::endl;
     #endif
 
@@ -544,7 +544,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(const double alpha, DoubleVector2d&& B)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "alpha*+ &&B " << std::endl;
     #endif
 
@@ -554,7 +554,7 @@ class DoubleVector2d
 
     DoubleVector2d operator*(const double alpha) const
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A*alpha" << std::endl;
     #endif
 
@@ -565,7 +565,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator*(DoubleVector2d&& A,const double alpha)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A * alpha" << std::endl;
     #endif
 
@@ -595,7 +595,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator/(DoubleVector2d& A, const double alpha)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&A/alpha" << std::endl;
     #endif
 
@@ -606,7 +606,7 @@ class DoubleVector2d
 
     friend DoubleVector2d operator/(DoubleVector2d&& A,const double alpha)
     {
-    #ifdef _VERBOSE_OPS_
+    #ifdef VERBOSE_OPS
     std::cout  << "&&A/alpha" << std::endl;
     #endif
 
