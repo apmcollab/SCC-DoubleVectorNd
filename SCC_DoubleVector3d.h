@@ -858,7 +858,7 @@ virtual long getDimension()
 #endif
 
 #ifdef _DEBUG
-    bool sizeCheck(long size1, long size2, int coordinate)
+    bool sizeCheck(long size1, long size2, int /* coordinate */)
     {
     if(size1 != size2)
     {
@@ -868,7 +868,7 @@ virtual long getDimension()
     return true;
     }
 
-    bool sizeCheck(long size1, long size2, int coordinate) const
+    bool sizeCheck(long size1, long size2, int /* coordinate */) const
     {
     if(size1 != size2)
     {
