@@ -733,7 +733,7 @@ void axpby(double alpha, const DoubleVector3d& v, double beta)
 {
    assert(sizeCheck(this->index1Size,v.index1Size,1));
    assert(sizeCheck(this->index2Size,v.index2Size,2));
-   assert(sizeCheck(this->index3Size,v.index2Size,3));
+   assert(sizeCheck(this->index3Size,v.index3Size,3));
 
    for(long i = 0; i < index1Size*index2Size*index3Size; i++)
    {dataPtr[i]  = alpha*v.dataPtr[i] + beta*dataPtr[i];}
@@ -745,7 +745,7 @@ void axpy(double alpha, const DoubleVector3d& v)
 {
    assert(sizeCheck(this->index1Size,v.index1Size,1));
    assert(sizeCheck(this->index2Size,v.index2Size,2));
-   assert(sizeCheck(this->index3Size,v.index2Size,3));
+   assert(sizeCheck(this->index3Size,v.index3Size,3));
 
    for(long i = 0; i < index1Size*index2Size*index3Size; i++)
    {dataPtr[i]  += alpha*v.dataPtr[i];}
@@ -862,7 +862,7 @@ virtual long getDimension()
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2  << std::endl;
     return false;
     }
     return true;
@@ -872,7 +872,7 @@ virtual long getDimension()
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector3d sizes are incompatible : " << size1 << " != " << size2  << std::endl;
     return false;
     }
     return true;

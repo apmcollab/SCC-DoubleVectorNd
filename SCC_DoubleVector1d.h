@@ -103,7 +103,6 @@ class DoubleVector1d
 #else
      std::copy(V.dataPtr, V.dataPtr + index1Size, dataPtr);
 #endif
-
    }
 
     DoubleVector1d(DoubleVector1d&& V)
@@ -118,7 +117,32 @@ class DoubleVector1d
       V.index1Size = 0;;
     }
 
-       virtual ~DoubleVector1d()
+    // Conversion operators for std::vector<double>
+
+    DoubleVector1d(const std::vector<double>& V)
+    {
+    	dataPtr    = nullptr;
+    	index1Size = 0;
+    	initialize(V);
+    }
+
+    operator std::vector<double>() const
+	{
+    std::vector<double> V;
+    if(index1Size == 0){return V;}
+
+    V.resize(index1Size);
+#ifdef _MSC_VER
+    std::memcpy(V.data(),dataPtr,(sizeof(double))*index1Size);
+#else
+     std::copy(dataPtr, dataPtr + index1Size, V.data());
+#endif
+    return V;
+	}
+
+
+
+    virtual ~DoubleVector1d()
     {
     if(dataPtr != nullptr) delete [] dataPtr;
     }
@@ -186,6 +210,33 @@ class DoubleVector1d
       V.dataPtr    = 0;
       V.index1Size = 0;
     }
+
+    void initialize(const std::vector<double>& V)
+    {
+      if(V.size() == 0)
+      {
+      if(dataPtr != nullptr) delete [] dataPtr;
+      dataPtr = nullptr;
+      index1Size = 0;
+      return;
+      }
+
+      if(index1Size != (long)V.size())
+      {
+      if(dataPtr != nullptr) delete [] dataPtr;
+      index1Size  = V.size();
+      dataPtr     = new double[index1Size];
+      }
+
+#ifdef _MSC_VER
+      std::memcpy(dataPtr,  V.data(), (sizeof(double))*index1Size);
+#else
+     std::copy(V.data(), V.data()+ index1Size, dataPtr);
+#endif
+    }
+
+
+
 
     // Assignment operators : Being careful with nullptr instances
 
@@ -732,7 +783,7 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector1d& V
         if((i < begin)||(i  > end))
         {
         std::cerr << "SCC::DoubleVector1d index " << coordinate << " out of bounds " << std::endl;
-        std::cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "]" << std::endl;
+        std::cerr << "Offending index value : " << i << " Acceptable Range [" << begin << "," << end << "] " << std::endl;
         return false;
         }
         return true;
@@ -746,7 +797,7 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector1d& V
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2 << "  \n";
     return false;
     }
     return true;
@@ -756,7 +807,7 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector1d& V
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector1d sizes are incompatible : " << size1 << " != " << size2 << "  \n";
     return false;
     }
     return true;

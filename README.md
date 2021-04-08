@@ -10,9 +10,9 @@ These classes currently use move semantics to avoid extraneous copying.
 ### Prerequisites
 C++11
 ### Versioning
-Release : 1.0.3
+Release : 1.0.4
 ### Date 
-July 16, 2020 
+April 8, 2021 
 ### Authors
 Chris Anderson
 ### License

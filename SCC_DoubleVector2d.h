@@ -818,7 +818,7 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector2d&V 
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2  << std::endl;
     return false;
     }
     return true;
@@ -828,7 +828,7 @@ friend std::ostream& operator<<(std::ostream& outStream, const DoubleVector2d&V 
     {
     if(size1 != size2)
     {
-    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2;
+    std::cerr << "SCC::DoubleVector2d sizes are incompatible : " << size1 << " != " << size2 << std::endl;
     return false;
     }
     return true;
