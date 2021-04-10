@@ -714,7 +714,7 @@ class DoubleVector1d
 
 /*!  Returns the dimension of the vector */
 
-    virtual long getDimension()
+    virtual long getDimension() const
     {
     return index1Size;
     }

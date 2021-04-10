@@ -716,7 +716,7 @@ void axpy(double alpha, const DoubleVector2d& v)
 
 /*!  Returns the dimension of the vector */
 
-virtual long getDimension()
+virtual long getDimension() const
 {
     return index1Size*index2Size;
 }
