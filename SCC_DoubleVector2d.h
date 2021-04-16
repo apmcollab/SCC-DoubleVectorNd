@@ -629,7 +629,7 @@ class DoubleVector2d
 
 /*!  Standard vector dot product.  */
 
-    double dot(const DoubleVector2d& v) const
+    virtual double dot(const DoubleVector2d& v) const
     {
     double dotVal = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
@@ -653,7 +653,7 @@ class DoubleVector2d
 
 /*!  The Euclidean norm of the vector. */
 
-    double norm2() const
+    virtual double norm2() const
     {
     double val = 0.0;
     for(long i = 0; i < index1Size*index2Size; i++)
@@ -661,13 +661,13 @@ class DoubleVector2d
     val += (dataPtr[i]*dataPtr[i]);
     }
     return std::sqrt(std::abs(val));
-}
+    }
 
 // Selected BLAS interface
 
 /*! BLAS Euclidean norm of the vector */
 
-double nrm2() const
+virtual double nrm2() const
 {
    return norm2();
 }

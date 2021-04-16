@@ -664,32 +664,32 @@ class DoubleVector3d
 
 /*!  Standard vector dot product.  */
 
-    double dot(const DoubleVector3d& v) const
-    {
+virtual double dot(const DoubleVector3d& v) const
+{
     double dotVal = 0.0;
     for(long i = 0; i < index1Size*index2Size*index3Size; i++)
     {
     dotVal += (dataPtr[i]*v.dataPtr[i]);
     }
     return dotVal;
-    }
+}
 
 /*!  Maximal absolute value of the elements of the vector. */
 
-    double normInf() const
-    {
+double normInf() const
+{
     double valMax = 0.0;
     for(long i = 0; i < index1Size*index2Size*index3Size; i++)
     {
     valMax = (valMax > std::abs(dataPtr[i])) ? valMax : std::abs(dataPtr[i]);
     }
     return valMax;
-    }
+}
 
 /*!  The Euclidean norm of the vector. */
 
-    double norm2() const
-    {
+virtual double norm2() const
+{
     double val = 0.0;
     for(long i = 0; i < index1Size*index2Size*index3Size; i++)
     {
@@ -702,7 +702,7 @@ class DoubleVector3d
 
 /*! BLAS Euclidean norm of the vector */
 
-double nrm2() const
+virtual double nrm2() const
 {
    return norm2();
 }
