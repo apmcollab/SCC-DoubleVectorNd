@@ -48,6 +48,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <vector>
 
 
 #ifdef  _DEBUG
