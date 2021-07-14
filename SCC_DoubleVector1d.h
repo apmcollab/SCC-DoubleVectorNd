@@ -225,7 +225,7 @@ class DoubleVector1d
       if(index1Size != (long)V.size())
       {
       if(dataPtr != nullptr) delete [] dataPtr;
-      index1Size  = V.size();
+      index1Size  = (long)V.size();
       dataPtr     = new double[index1Size];
       }
 
