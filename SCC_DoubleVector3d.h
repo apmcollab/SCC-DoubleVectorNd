@@ -59,8 +59,6 @@
 #endif
 #include <cassert>
 
-#undef VERBOSE_OPS
-
 #ifndef SCC_DOUBLE_VECTOR_3D_
 #define SCC_DOUBLE_VECTOR_3D_
 
@@ -302,7 +300,7 @@ class DoubleVector3d
 
     DoubleVector3d R(*this);
     R.transformValues(F);
-    return std::move(R);
+    return R;
     }
 
 
@@ -329,7 +327,7 @@ class DoubleVector3d
     assert(A.sizeCheck(A.index3Size,B.index3Size,3));
     DoubleVector3d R(A);
     R += B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator+(const DoubleVector3d& A, DoubleVector3d&& B)
@@ -398,7 +396,7 @@ class DoubleVector3d
 
     DoubleVector3d R(A);
     R -= B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator-(const DoubleVector3d& A, DoubleVector3d&& B)
@@ -454,7 +452,7 @@ class DoubleVector3d
 
     DoubleVector3d R(A);
     R *= -1.0;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator-(DoubleVector3d&& A)
@@ -474,7 +472,7 @@ class DoubleVector3d
     #endif
 
     DoubleVector3d R(A);
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator+(DoubleVector3d&& A)
@@ -509,7 +507,7 @@ class DoubleVector3d
     assert(A.sizeCheck(A.index3Size,B.index3Size,3));
     DoubleVector3d R(A);
     R *= B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator*(const DoubleVector3d& A, DoubleVector3d&& B)
@@ -575,7 +573,7 @@ class DoubleVector3d
 
     DoubleVector3d R(B);
     R *= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator*(const double alpha, DoubleVector3d&& B)
@@ -596,7 +594,7 @@ class DoubleVector3d
 
     DoubleVector3d R(*this);
     R *= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator*(DoubleVector3d&& A,const double alpha)
@@ -637,7 +635,7 @@ class DoubleVector3d
 
     DoubleVector3d R(A);
     R /= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector3d operator/(DoubleVector3d&& A,const double alpha)
@@ -649,6 +647,69 @@ class DoubleVector3d
     A /= alpha;
     return std::move(A);
     }
+
+    friend DoubleVector3d operator/(const DoubleVector3d& A, const DoubleVector3d& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&A * &B" << std::endl;
+    #endif
+
+
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    assert(A.sizeCheck(A.index3Size,B.index3Size,3));
+
+    DoubleVector3d R(A);
+    R /= B;
+    return R;
+    }
+
+    friend DoubleVector3d operator/(const DoubleVector3d& A, DoubleVector3d&& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&A * &&B " << std::endl;
+    #endif
+
+
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    assert(A.sizeCheck(A.index3Size,B.index3Size,3));
+
+    DoubleVector3d R(A);
+    R /= B;
+    return R;
+    }
+
+    friend DoubleVector3d operator/(DoubleVector3d&& A, const DoubleVector3d& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&&A *  &B" << std::endl;
+    #endif
+
+
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    assert(A.sizeCheck(A.index3Size,B.index3Size,3));
+
+    A /= B;
+    return std::move(A);
+    }
+
+    friend DoubleVector3d operator/(DoubleVector3d&& A, DoubleVector3d&& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&&A *  &&B" << std::endl;
+    #endif
+
+
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    assert(A.sizeCheck(A.index3Size,B.index3Size,3));
+
+    A /= B;
+    return std::move(A);
+    }
+
 /*!  Sets all values of the vector to d. */
     void setToValue(double d)
     {

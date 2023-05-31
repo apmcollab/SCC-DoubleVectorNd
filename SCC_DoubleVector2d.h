@@ -58,8 +58,6 @@
 #endif
 #include <cassert>
 
-#undef VERBOSE_OPS
-
 #ifndef SCC_DOUBLE_VECTOR_2D_
 #define SCC_DOUBLE_VECTOR_2D_
 
@@ -284,7 +282,7 @@ class DoubleVector2d
 
     DoubleVector2d R(*this);
     R.transformValues(F);
-    return std::move(R);
+    return R;
     }
 
 
@@ -309,7 +307,7 @@ class DoubleVector2d
 
     DoubleVector2d R(A);
     R += B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator+(const DoubleVector2d& A, DoubleVector2d&& B)
@@ -373,7 +371,7 @@ class DoubleVector2d
 
     DoubleVector2d R(A);
     R -= B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator-(const DoubleVector2d& A, DoubleVector2d&& B)
@@ -426,7 +424,7 @@ class DoubleVector2d
 
     DoubleVector2d R(A);
     R *= -1.0;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator-(DoubleVector2d&& A)
@@ -446,7 +444,7 @@ class DoubleVector2d
     #endif
 
     DoubleVector2d R(A);
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator+(DoubleVector2d&& A)
@@ -480,7 +478,7 @@ class DoubleVector2d
 
     DoubleVector2d R(A);
     R *= B;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator*(const DoubleVector2d& A, DoubleVector2d&& B)
@@ -540,7 +538,7 @@ class DoubleVector2d
 
     DoubleVector2d R(B);
     R *= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator*(const double alpha, DoubleVector2d&& B)
@@ -561,7 +559,7 @@ class DoubleVector2d
 
     DoubleVector2d R(*this);
     R *= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator*(DoubleVector2d&& A,const double alpha)
@@ -602,7 +600,7 @@ class DoubleVector2d
 
     DoubleVector2d R(A);
     R /= alpha;
-    return std::move(R);
+    return R;
     }
 
     friend DoubleVector2d operator/(DoubleVector2d&& A,const double alpha)
@@ -614,6 +612,55 @@ class DoubleVector2d
     A /= alpha;
     return std::move(A);
     }
+
+
+    friend DoubleVector2d operator/(const DoubleVector2d& A, const DoubleVector2d& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&A * &B" << std::endl;
+    #endif
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    DoubleVector2d R(A);
+    R /= B;
+    return R;
+    }
+
+    friend DoubleVector2d operator/(const DoubleVector2d& A, DoubleVector2d&& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&A * &&B " << std::endl;
+    #endif
+
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    DoubleVector2d R(A);
+    R /= B;
+    return R;
+    }
+
+    friend DoubleVector2d operator/(DoubleVector2d&& A, const DoubleVector2d& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&&A *  &B" << std::endl;
+    #endif
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    A /= B;
+    return std::move(A);
+    }
+
+    friend DoubleVector2d operator/(DoubleVector2d&& A, DoubleVector2d&& B)
+    {
+    #ifdef VERBOSE_OPS
+    std::cout  << "&&A *  &&B" << std::endl;
+    #endif
+    assert(A.sizeCheck(A.index1Size,B.index1Size,1));
+    assert(A.sizeCheck(A.index2Size,B.index2Size,2));
+    A /= B;
+    return std::move(A);
+    }
+
 /*!  Sets all values of the vector to d. */
     void setToValue(double d)
     {
