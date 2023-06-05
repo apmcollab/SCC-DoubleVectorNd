@@ -207,6 +207,12 @@ class DoubleVector3d
       V.index3Size = 0;
     }
 
+    bool isNull() const
+    {
+    if(dataPtr == nullptr){ return true;}
+    return false;
+    }
+
     // Assignment operators : Being careful with nullptr instances
 
     DoubleVector3d& operator=(const DoubleVector3d& V)

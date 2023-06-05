@@ -234,7 +234,11 @@ class DoubleVector1d
 #endif
     }
 
-
+    bool isNull() const
+    {
+    if(dataPtr == nullptr){ return true;}
+    return false;
+    }
 
 
     // Assignment operators : Being careful with nullptr instances

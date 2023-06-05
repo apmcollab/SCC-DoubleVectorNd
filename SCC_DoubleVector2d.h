@@ -195,6 +195,12 @@ class DoubleVector2d
       V.index2Size = 0;
     }
 
+    bool isNull() const
+    {
+    if(dataPtr == nullptr){return true;}
+    return false;
+    }
+
     // Assignment operators : Being careful with nullptr instances
 
     DoubleVector2d& operator=(const DoubleVector2d& V)
